@@ -105,7 +105,7 @@ export const isPasswordValid = (
 export const isPhoneExist = async (
   phone: string,
 ): Promise<Error | undefined> => {
-  const user = await usersFindOne({ phone })
+  const user = await usersFindOne({ phone: phone })
   if (user) {
     return {
       message: 'Phone Number Already Exist',

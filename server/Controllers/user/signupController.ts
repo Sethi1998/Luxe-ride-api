@@ -21,7 +21,7 @@ export default async (input: signupInput) => {
     if (isEmailValid) return isEmailValid
     const isValidPhone = isValidPhoneError(input.phone)
     if (isValidPhone) return isValidPhone
-    const phoneExist = isPhoneExist(input.phone)
+    const phoneExist = await isPhoneExist(input.phone)
     if (phoneExist) return phoneExist
     const isPasswordValid = isValidPasswordError(input.password)
     if (isPasswordValid) return isPasswordValid

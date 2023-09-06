@@ -31,6 +31,7 @@ export interface user {
   profileImg: string
   deviceType: DeviceType
   fcmToken: string
+  countryCode: string
 }
 const UserSchema = new Schema<user>(
   {
@@ -51,6 +52,10 @@ const UserSchema = new Schema<user>(
       type: String,
       required: true,
       unique: true,
+    },
+    countryCode: {
+      type: String,
+      required: true,
     },
     password: {
       type: String,
