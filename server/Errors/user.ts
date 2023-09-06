@@ -3,6 +3,7 @@ import { user } from '@/Database/models/user'
 import { Error } from '@/Types/error'
 import Joi from 'joi'
 import bcrypt from 'bcrypt'
+import usersFindOne from '@/Database/operations/User/findOne'
 
 const isEmail = (string: string): boolean => {
   const isEmailRegExp = new RegExp(
@@ -10,6 +11,12 @@ const isEmail = (string: string): boolean => {
   )
 
   return isEmailRegExp.test(string)
+}
+const isPhone = (string: string): boolean => {
+  const isPhoneRegex = new RegExp(
+    /(\+\d{1,3}\s?)?((\(\d{3}\)\s?)|(\d{3})(\s|-?))(\d{3}(\s|-?))(\d{4})(\s?(([E|e]xt[:|.|]?)|x|X)(\s?\d+))?/g,
+  )
+  return isPhoneRegex.test(string)
 }
 const schema = Joi.string()
   .required()
@@ -40,7 +47,16 @@ export const isValidEmailError = (email: string): Error => {
   if (!isEmail(email)) {
     return {
       message: 'This is not a valid email',
-      code: 'false',
+      success: 'false',
+    }
+  }
+}
+// Check if valid phone string.
+export const isValidPhoneError = (phone: string): Error => {
+  if (!isPhone(phone)) {
+    return {
+      message: 'This is not a valid phone number',
+      success: 'false',
     }
   }
 }
@@ -51,7 +67,7 @@ export const isValidPasswordError = (password: string): Error => {
     return {
       message:
         'Minimum 8 characters with at least one uppercase, lowercase, numeric and special characters.',
-      code: 'true',
+      success: 'false',
     }
   }
 }
@@ -61,7 +77,7 @@ export const userDoesNotExistsError = (user: user): Error | undefined => {
   if (!user) {
     return {
       message: "Sorry we can't find this email. Please check and try again.",
-      code: 'false',
+      success: 'false',
     }
   }
 }
@@ -69,7 +85,7 @@ export const userAlreadyExistError = (user: user): Error | undefined => {
   if (user) {
     return {
       message: 'Email already exist.',
-      code: 'false',
+      success: 'false',
     }
   }
 }
@@ -82,7 +98,18 @@ export const isPasswordValid = (
   if (!valid) {
     return {
       message: 'Sorry the password you have entered is incorrect.',
-      code: 'INVALID_PASSWORD',
+      success: 'false',
+    }
+  }
+}
+export const isPhoneExist = async (
+  phone: string,
+): Promise<Error | undefined> => {
+  const user = await usersFindOne({ phone })
+  if (user) {
+    return {
+      message: 'Phone Number Already Exist',
+      success: 'false',
     }
   }
 }

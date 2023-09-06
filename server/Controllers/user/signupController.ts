@@ -1,8 +1,10 @@
 import bcrypt from 'bcrypt'
 import UserModel from '@/Database/models/user'
 import {
+  isPhoneExist,
   isValidEmailError,
   isValidPasswordError,
+  isValidPhoneError,
   userAlreadyExistError,
 } from '@/Errors/user'
 import { signupInput } from '@/Types/User'
@@ -14,14 +16,15 @@ export default async (input: signupInput) => {
   try {
     const findUser = await usersFindOne({ email: input.email })
     const userExist = userAlreadyExistError(findUser)
-    if (userExist)
-      return {
-        error: userExist,
-      }
+    if (userExist) return userExist
     const isEmailValid = isValidEmailError(input.email)
-    if (isEmailValid) return { error: isEmailValid }
+    if (isEmailValid) return isEmailValid
+    const isValidPhone = isValidPhoneError(input.phone)
+    if (isValidPhone) return isValidPhone
+    const phoneExist = isPhoneExist(input.phone)
+    if (phoneExist) return phoneExist
     const isPasswordValid = isValidPasswordError(input.password)
-    if (isPasswordValid) return { error: isPasswordValid }
+    if (isPasswordValid) return isPasswordValid
     const { password } = input
     const hashedPassword = await bcrypt.hash(password, 12)
     const createUser = await UserModel.create({
@@ -35,9 +38,10 @@ export default async (input: signupInput) => {
     const token = signToken(createUser)
 
     return {
-      user: createUser,
+      data: createUser,
+      success: true,
+      message: 'Signup Successfully',
       token,
-      error: null,
     }
   } catch (error) {
     return error

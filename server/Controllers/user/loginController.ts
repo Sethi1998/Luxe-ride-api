@@ -7,9 +7,9 @@ export default async (input: loginInput) => {
   try {
     const user = await usersFindOne({ email: input.email })
     const userNoExist = userDoesNotExistsError(user)
-    if (userNoExist) return { error: userNoExist }
+    if (userNoExist) return userNoExist
     const passwordValid = isPasswordValid(input.password, user.password)
-    if (passwordValid) return { error: passwordValid }
+    if (passwordValid) return passwordValid
     await usersUpdateOne(
       { _id: user._id },
       { deviceType: input.deviceType, fcmToken: input.fcmToken },
@@ -18,7 +18,6 @@ export default async (input: loginInput) => {
     return {
       user,
       token,
-      error: null,
     }
   } catch (error) {
     return error
