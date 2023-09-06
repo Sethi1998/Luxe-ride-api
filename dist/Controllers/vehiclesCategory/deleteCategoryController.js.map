@@ -1,1 +1,0 @@
-{"version":3,"file":"deleteCategoryController.js","sourceRoot":"","sources":["../../../server/Controllers/vehiclesCategory/deleteCategoryController.ts"],"names":[],"mappings":";;;;;AAAA,wFAAoE;AAEpE,kBAAe,KAAK,EAAE,KAAa,EAAE,EAAE;IACrC,MAAM,GAAG,GAAG,MAAM,yBAAoB,CAAC,SAAS,CAAC,EAAE,GAAG,EAAE,KAAK,EAAE,CAAC,CAAA;IAChE,IAAI,GAAG,EAAE;QACP,OAAO,+BAA+B,CAAA;KACvC;AACH,CAAC,CAAA"}
