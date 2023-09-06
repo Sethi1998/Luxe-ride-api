@@ -71,7 +71,7 @@ userRouter.post(
     const user = req.user
     const input = req.body
     const response = await updateUserController(user, input)
-    res.json(response)
+    res.send(response)
   },
 )
 

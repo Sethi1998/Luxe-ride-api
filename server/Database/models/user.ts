@@ -5,6 +5,10 @@ enum UserRole {
   owner = 'owner',
   admin = 'admin',
 }
+enum DeviceType {
+  android = 'android',
+  ios = 'ios',
+}
 interface Driverlicense {
   firstName: string
   middleName: string
@@ -25,7 +29,7 @@ export interface user {
   role: UserRole
   license: Driverlicense
   profileImg: string
-  deviceType: string
+  deviceType: DeviceType
   fcmToken: string
 }
 const UserSchema = new Schema<user>(
@@ -83,6 +87,7 @@ const UserSchema = new Schema<user>(
     },
     deviceType: {
       type: String,
+      enum: DeviceType,
     },
     fcmToken: {
       type: String,

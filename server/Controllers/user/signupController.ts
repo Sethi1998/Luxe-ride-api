@@ -7,6 +7,8 @@ import {
 } from '@/Errors/user'
 import { signupInput } from '@/Types/User'
 import usersFindOne from '@/Database/operations/User/findOne'
+import { signToken } from '@/services/authJwt'
+import usersUpdateOne from '@/Database/operations/User/updateOne'
 
 export default async (input: signupInput) => {
   try {
@@ -14,7 +16,7 @@ export default async (input: signupInput) => {
     const userExist = userAlreadyExistError(findUser)
     if (userExist)
       return {
-        erro: userExist,
+        error: userExist,
       }
     const isEmailValid = isValidEmailError(input.email)
     if (isEmailValid) return { error: isEmailValid }
@@ -26,7 +28,17 @@ export default async (input: signupInput) => {
       ...input,
       password: hashedPassword,
     })
-    return createUser
+    await usersUpdateOne(
+      { _id: createUser._id },
+      { deviceType: input.deviceType, fcmToken: input.fcmToken },
+    )
+    const token = signToken(createUser)
+
+    return {
+      user: createUser,
+      token,
+      error: null,
+    }
   } catch (error) {
     return error
   }
