@@ -10,13 +10,18 @@ const userRouter = express.Router()
 
 //getUserInfo
 userRouter.get(
-  '/getUser',
+  '/me',
   [parseJwt],
   async (req: IGetUserAuthInfoRequest, res: Response) => {
     const id = req.user._id
     if (!id) return null
     const user = await usersFindOne({ _id: id })
-    res.json(user)
+    const response = {
+      data: user,
+      message: 'Get user successfully',
+      success: 'true',
+    }
+    res.json(response)
   },
 )
 
