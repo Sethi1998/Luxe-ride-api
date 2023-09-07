@@ -19,7 +19,7 @@ userRouter.get(
     const response = {
       data: user,
       message: 'Get user successfully',
-      success: 'true',
+      success: true,
     }
     res.json(response)
   },
