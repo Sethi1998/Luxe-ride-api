@@ -13,6 +13,7 @@ import usersUpdateOne from '@/Database/operations/User/updateOne'
 
 export default async (input: signupInput) => {
   try {
+    console.log(input, 'input')
     const findUser = await usersFindOne({ email: input.email })
     const userExist = userAlreadyExistError(findUser)
     if (userExist) return userExist
