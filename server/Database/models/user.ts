@@ -27,7 +27,7 @@ interface Driverlicense {
 }
 export interface user {
   _id: Types.ObjectId
-  socaialId: string
+  socialId: string
   firstName: string
   lastName: string
   email: string
@@ -44,7 +44,7 @@ export interface user {
 }
 const UserSchema = new Schema<user>(
   {
-    socaialId: {
+    socialId: {
       type: String,
     },
     signUpType: {
