@@ -6,7 +6,7 @@ import userRouter from './Routes/userRoutes'
 import initiateMongoServer from './Database'
 import imgRouter from './services/imgUpload'
 import cors from 'cors'
-import vechicleCategoryRouter from './Routes/vehicleCategoryRoutes'
+import vechicleCategoryRouter from './Routes/vehicleCompanyRoutes'
 import vehicleRouter from './Routes/vehicleRouter'
 const app: express.Application = express()
 const PORT = 8080

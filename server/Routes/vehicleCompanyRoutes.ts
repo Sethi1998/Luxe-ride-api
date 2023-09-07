@@ -1,21 +1,21 @@
-import createCategoryController from '@/Controllers/vehiclesCategory/createCategoryController'
-import deleteCategoryController from '@/Controllers/vehiclesCategory/deleteCategoryController'
-import editCategoryController from '@/Controllers/vehiclesCategory/editCategoryController'
-import getCategoriesController from '@/Controllers/vehiclesCategory/getCategoriesController'
-import { VehicleCategory } from '@/Database/models/vehicleCategory'
+import createCompanyController from '@/Controllers/vehicleCompany/createCompanyController'
+import deleteCompanyController from '@/Controllers/vehicleCompany/deleteCompanyController'
+import editCompanyController from '@/Controllers/vehicleCompany/editCompanyController'
+import getCompanyController from '@/Controllers/vehicleCompany/getCompanyController'
+import { VehicleCompany } from '@/Database/models/vehicleCompany'
 import { parseJwtAdmin } from '@/services/authJwt'
 import { upload } from '@/services/imgUpload'
 import express, { Request, Response } from 'express'
 
-const vechicleCategoryRouter = express.Router()
+const vechicleCompanyRouter = express.Router()
 ///getCategory
-vechicleCategoryRouter.get(
-  '/getCategories',
+vechicleCompanyRouter.get(
+  '/getCompanies',
   [parseJwtAdmin],
   async (req: Request, res: Response) => {
     const limit = req.query.limit as string
     const offset = req.query.offset as string
-    const response = await getCategoriesController(
+    const response = await getCompanyController(
       parseInt(limit),
       parseInt(offset),
     )
@@ -23,9 +23,9 @@ vechicleCategoryRouter.get(
   },
 )
 
-///createCategory
-vechicleCategoryRouter.post(
-  '/createCategory',
+///createCompany
+vechicleCompanyRouter.post(
+  '/createCompany',
   [parseJwtAdmin],
   upload.array('files'),
   async (req: any, res: Response) => {
@@ -34,26 +34,26 @@ vechicleCategoryRouter.post(
     const filesUrl = files.map((item) => item.filename)
     const inputData = {
       ...input,
-      vehicleImg: filesUrl[0],
+      companyImg: filesUrl[0],
     }
-    const response = await createCategoryController(inputData)
+    const response = await createCompanyController(inputData)
     res.json(response)
   },
 )
 //editCategory
-vechicleCategoryRouter.post(
-  '/editCategory',
+vechicleCompanyRouter.post(
+  '/editCompany',
   [parseJwtAdmin],
   upload.array('files'),
   async (req: any, res: Response) => {
     const input = req.body
     const files = req.files
-    let inputData = <VehicleCategory>{}
+    let inputData = <VehicleCompany>{}
     if (files) {
       const filesUrl = files.map((item) => item.filename)
       inputData = {
         ...input,
-        vehicleImg: filesUrl[0],
+        companyImg: filesUrl[0],
       }
     } else {
       inputData = {
@@ -61,20 +61,20 @@ vechicleCategoryRouter.post(
       }
     }
 
-    const response = await editCategoryController(inputData)
+    const response = await editCompanyController(inputData)
     res.json(response)
   },
 )
 //deleteCategory
-vechicleCategoryRouter.post(
-  '/deleteCategory',
+vechicleCompanyRouter.post(
+  '/deleteCompany',
   [parseJwtAdmin],
   async (req: Request, res: Response) => {
     const id = req.body.id
     console.log(id, 'idd')
-    const response = await deleteCategoryController(id)
+    const response = await deleteCompanyController(id)
     res.json(response)
   },
 )
 
-export default vechicleCategoryRouter
+export default vechicleCompanyRouter

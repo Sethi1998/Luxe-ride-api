@@ -28,6 +28,7 @@ export interface user {
   password: string
   role: UserRole
   license: Driverlicense
+  ninNumber: string
   profileImg: string
   deviceType: DeviceType
   fcmToken: string
@@ -89,6 +90,9 @@ const UserSchema = new Schema<user>(
         type: String,
       },
     }),
+    ninNumber: {
+      type: String,
+    },
     profileImg: {
       type: String,
     },
@@ -101,7 +105,8 @@ const UserSchema = new Schema<user>(
     },
     role: {
       type: String,
-      enum: ['user', 'owner', 'admin'],
+      enum: UserRole,
+      default: UserRole.user,
     },
   },
   {

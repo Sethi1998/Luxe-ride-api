@@ -1,20 +1,20 @@
 import { Schema, model, Types } from 'mongoose'
 
-export interface VehicleCategory {
+export interface VehicleCompany {
   _id: Types.ObjectId
-  vehicleName: string
-  vehicleImg: string
+  companyName: string
+  companyImg: string
   active: boolean
 }
 
-const VehicleCategorySchema = new Schema<VehicleCategory>(
+const VehicleCompanySchema = new Schema<VehicleCompany>(
   {
-    vehicleName: {
+    companyName: {
       type: String,
       required: true,
       unique: true,
     },
-    vehicleImg: {
+    companyImg: {
       type: String,
       required: true,
     },
@@ -27,5 +27,5 @@ const VehicleCategorySchema = new Schema<VehicleCategory>(
     timestamps: true,
   },
 )
-const VehicleCategoryModel = model('vehicleCategory', VehicleCategorySchema)
-export default VehicleCategoryModel
+const VehicleCompanyModel = model('vehicleCompanies', VehicleCompanySchema)
+export default VehicleCompanyModel

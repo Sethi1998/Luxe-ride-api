@@ -1,6 +1,6 @@
 import { user } from '@/Database/models/user'
 import VehicleModel, { Vehicle } from '@/Database/models/vehicle'
-import VehicleCategoryModel from '@/Database/models/vehicleCategory'
+import VehicleCategoryModel from '@/Database/models/vehicleCompany'
 import {
   categoryDoesNotExistsError,
   numberPlateExist,

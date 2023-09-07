@@ -1,13 +1,13 @@
-import VehicleCategoryModel from '@/Database/models/vehicleCategory'
+import VehicleCompanyModel from '@/Database/models/vehicleCompany'
 
 export default async (limit: number, offset: number) => {
   try {
-    const categories = await VehicleCategoryModel.find()
+    const categories = await VehicleCompanyModel.find()
       .sort({ createdAt: -1 })
       .limit(limit)
       .skip(offset)
       .lean()
-    const totalCount = await VehicleCategoryModel.countDocuments()
+    const totalCount = await VehicleCompanyModel.countDocuments()
 
     return {
       data: categories,
