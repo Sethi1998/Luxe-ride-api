@@ -16,9 +16,9 @@ export default async (input: loginInput) => {
     )
     const token = signToken(user)
     return {
-      user,
+      data: user,
       token,
-      success: true,
+      success: 'true',
       message: 'Login Successfully',
     }
   } catch (error) {

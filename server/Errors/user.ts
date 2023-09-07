@@ -113,3 +113,17 @@ export const isPhoneExist = async (
     }
   }
 }
+
+export const isEmailSend = (input) => {
+  if (!input) {
+    return {
+      message: 'Technical Issue!, Please Click on resend button.',
+      success: 'false',
+    }
+  } else {
+    return {
+      message: 'email sent',
+      success: 'true',
+    }
+  }
+}
