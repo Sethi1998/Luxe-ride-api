@@ -1,7 +1,6 @@
 /* eslint-disable no-control-regex */
 import { user } from '@/Database/models/user'
 import { Error } from '@/Types/error'
-import Joi from 'joi'
 import bcrypt from 'bcrypt'
 import usersFindOne from '@/Database/operations/User/findOne'
 
@@ -18,28 +17,11 @@ const isPhone = (string: string): boolean => {
   )
   return isPhoneRegex.test(string)
 }
-const schema = Joi.string()
-  .required()
-  .min(8)
-  .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/)
-  .error((errors: any) => {
-    errors.forEach((err: any) => {
-      switch (err.type) {
-        case 'string.regex.base':
-          err.message =
-            'At least one lower case (a-z), one upper case (A-Z) and number (0-9)'
-          break
-        case 'string.min':
-          err.message = 'Password is too short - should be 8 chars minimum.'
-      }
-    })
-    return errors
-  })
 
 export const checkPasswordPolicies = (password: string): boolean => {
-  const { error } = schema.validate(password)
-
-  return !error
+  if (password.length < 8) {
+    return !true
+  }
 }
 
 // Check if valid email string.
@@ -47,7 +29,7 @@ export const isValidEmailError = (email: string): Error => {
   if (!isEmail(email)) {
     return {
       message: 'This is not a valid email',
-      success: 'false',
+      success: false,
     }
   }
 }
@@ -56,7 +38,7 @@ export const isValidPhoneError = (phone: string): Error => {
   if (!isPhone(phone)) {
     return {
       message: 'This is not a valid phone number',
-      success: 'false',
+      success: false,
     }
   }
 }
@@ -65,9 +47,8 @@ export const isValidPhoneError = (phone: string): Error => {
 export const isValidPasswordError = (password: string): Error => {
   if (!checkPasswordPolicies(password)) {
     return {
-      message:
-        'Minimum 8 characters with at least one uppercase, lowercase, numeric and special characters.',
-      success: 'false',
+      message: 'Minimum 8 characters.',
+      success: false,
     }
   }
 }
@@ -77,7 +58,7 @@ export const userDoesNotExistsError = (user: user): Error | undefined => {
   if (!user) {
     return {
       message: "Sorry we can't find this email. Please check and try again.",
-      success: 'false',
+      success: false,
     }
   }
 }
@@ -85,7 +66,7 @@ export const userAlreadyExistError = (user: user): Error | undefined => {
   if (user) {
     return {
       message: 'Email already exist.',
-      success: 'false',
+      success: false,
     }
   }
 }
@@ -98,7 +79,7 @@ export const isPasswordValid = (
   if (!valid) {
     return {
       message: 'Sorry the password you have entered is incorrect.',
-      success: 'false',
+      success: false,
     }
   }
 }
@@ -109,7 +90,7 @@ export const isPhoneExist = async (
   if (user) {
     return {
       message: 'Phone Number Already Exist',
-      success: 'false',
+      success: false,
     }
   }
 }
@@ -118,12 +99,12 @@ export const isEmailSend = (input) => {
   if (!input) {
     return {
       message: 'Technical Issue!, Please Click on resend button.',
-      success: 'false',
+      success: false,
     }
   } else {
     return {
       message: 'email sent',
-      success: 'true',
+      success: true,
     }
   }
 }

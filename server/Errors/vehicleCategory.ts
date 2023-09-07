@@ -8,7 +8,7 @@ export const categoryAlreadyExistError = (
   if (category) {
     return {
       message: 'Category Name already exist.',
-      success: 'false',
+      success: false,
     }
   }
 }
@@ -19,7 +19,7 @@ export const categoryDoesNotExistsError = (
   if (!category) {
     return {
       message: "Sorry we can't find this Category. Please check and try again.",
-      success: 'false',
+      success: false,
     }
   }
 }
@@ -31,7 +31,7 @@ export const vinNumberExist = async (
   if (vinNumber) {
     return {
       message: 'Vin Number already exist.',
-      success: 'false',
+      success: false,
     }
   }
 }
@@ -44,7 +44,7 @@ export const numberPlateExist = async (
   if (numberPlate) {
     return {
       message: 'Number Plate already exist.',
-      success: 'false',
+      success: false,
     }
   }
 }

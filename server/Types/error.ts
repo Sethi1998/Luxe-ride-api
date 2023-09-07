@@ -1,4 +1,4 @@
 export interface Error {
   message: string
-  success?: string
+  success?: boolean
 }

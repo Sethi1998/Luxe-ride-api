@@ -18,7 +18,7 @@ export default async (input: loginInput) => {
     return {
       data: user,
       token,
-      success: 'true',
+      success: true,
       message: 'Login Successfully',
     }
   } catch (error) {

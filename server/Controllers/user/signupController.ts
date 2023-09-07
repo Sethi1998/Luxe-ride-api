@@ -39,7 +39,7 @@ export default async (input: signupInput) => {
 
     return {
       data: createUser,
-      success: 'true',
+      success: true,
       message: 'Signup Successfully',
       token,
     }
