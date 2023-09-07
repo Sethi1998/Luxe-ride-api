@@ -9,6 +9,12 @@ enum DeviceType {
   android = 'android',
   ios = 'ios',
 }
+enum SignupType {
+  email = 'email',
+  facebook = 'facebook',
+  google = 'google',
+  apple = 'apple',
+}
 interface Driverlicense {
   firstName: string
   middleName: string
@@ -21,6 +27,7 @@ interface Driverlicense {
 }
 export interface user {
   _id: Types.ObjectId
+  socaialId: string
   firstName: string
   lastName: string
   email: string
@@ -33,9 +40,17 @@ export interface user {
   deviceType: DeviceType
   fcmToken: string
   countryCode: string
+  signUpType: SignupType
 }
 const UserSchema = new Schema<user>(
   {
+    socaialId: {
+      type: String,
+    },
+    signUpType: {
+      type: String,
+      enum: SignupType,
+    },
     firstName: {
       type: String,
       required: true,
@@ -49,14 +64,13 @@ const UserSchema = new Schema<user>(
       required: true,
       unique: true,
     },
+
     phone: {
       type: String,
-      required: true,
       unique: true,
     },
     countryCode: {
       type: String,
-      required: true,
     },
     password: {
       type: String,
