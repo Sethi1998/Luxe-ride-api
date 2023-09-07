@@ -3,7 +3,6 @@ import UserModel from '@/Database/models/user'
 import {
   isPhoneExist,
   isValidEmailError,
-  isValidPasswordError,
   isValidPhoneError,
   userAlreadyExistError,
 } from '@/Errors/user'
@@ -23,8 +22,7 @@ export default async (input: signupInput) => {
     if (isValidPhone) return isValidPhone
     const phoneExist = await isPhoneExist(input.phone)
     if (phoneExist) return phoneExist
-    const isPasswordValid = isValidPasswordError(input.password)
-    if (isPasswordValid) return isPasswordValid
+
     const { password } = input
     const hashedPassword = await bcrypt.hash(password, 12)
     const createUser = await UserModel.create({
