@@ -6,6 +6,8 @@ import { IGetUserAuthInfoRequest } from '@/Types/User'
 import { parseJwt, parseJwtAdmin } from '@/services/authJwt'
 import express, { Request, Response } from 'express'
 import usersFindOne from '@/Database/operations/User/findOne'
+import { upload } from '@/services/imgUpload'
+import profileImgController from '@/Controllers/user/profileImgController'
 const userRouter = express.Router()
 
 //getUserInfo
@@ -68,6 +70,23 @@ userRouter.post('/adminlogin', async (req: Request, res: Response) => {
   const response = await loginController(input)
   res.json(response)
 })
+
+//updateUserImg
+userRouter.post(
+  '/updateUserImg',
+  [parseJwt],
+  upload.array('files'),
+  async (req: any, res: Response) => {
+    const user = req.user
+    const files = req.files
+    const input = {
+      user: user,
+      files: files[0].filename,
+    }
+    const response = await profileImgController(input)
+    res.json(response)
+  },
+)
 //updateuser
 userRouter.post(
   '/updateUser',
