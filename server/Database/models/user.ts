@@ -41,6 +41,9 @@ export interface user {
   fcmToken: string
   countryCode: string
   signUpType: SignupType
+  isEmailVerified: boolean
+  isPhoneVerified: boolean
+  isFacebook: string
 }
 const UserSchema = new Schema<user>(
   {
@@ -121,6 +124,17 @@ const UserSchema = new Schema<user>(
       type: String,
       enum: UserRole,
       default: UserRole.user,
+    },
+    isEmailVerified: {
+      type: Boolean,
+      default: false,
+    },
+    isPhoneVerified: {
+      type: Boolean,
+      default: false,
+    },
+    isFacebook: {
+      type: String,
     },
   },
   {
