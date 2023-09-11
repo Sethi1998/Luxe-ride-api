@@ -26,7 +26,7 @@ const fileStorage = Multer.diskStorage({
 })
 export const upload = Multer({
   storage: fileStorage,
-  limits: { fileSize: 20 * 1024 * 1024 }, //20mb
+  limits: { fileSize: 50 * 1024 * 1024 }, //20mb
 })
 
 router.post('/imgUpload', upload.array('files'), async (req: any, res) => {
