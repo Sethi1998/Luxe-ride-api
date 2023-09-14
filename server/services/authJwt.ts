@@ -23,7 +23,10 @@ export const checkToken = (token: string): any => {
 export const parseJwt = (req: Request | any, res, next: () => void): void => {
   const authorizationHeader = req.headers.authorization
   if (!authorizationHeader) {
-    res.send('Please Provide Authorization token')
+    res.json({
+      success: false,
+      message: "'Please Provide Authorization token'",
+    })
   }
   const token: string = authorizationHeader.replace('Bearer ', '')
   jwt.verify(token, process.env.JWT_TOKEN_SECRET, (err, user) => {
