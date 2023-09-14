@@ -26,18 +26,25 @@ export const parseJwt = (req: Request | any, res, next: () => void): void => {
     res.send('Please Provide Authorization token')
   }
   const token: string = authorizationHeader.replace('Bearer ', '')
-  try {
-    const jwtData = checkToken(token)
-    if (jwtData && jwtData.user) {
-      req.user = jwtData.user
-      next()
+  jwt.verify(token, process.env.JWT_TOKEN_SECRET, (err, user) => {
+    if (err) {
+      res.json({
+        success: false,
+        message: 'unauthorized',
+      })
     } else {
-      console.log('not authorised')
-      // authLogger.debug('Token was not authorized', { token });
+      req.user = user
+      next()
     }
-  } catch (err) {
-    console.log('err', err)
-  }
+  })
+  // checkToken(token).then((err, user) => {
+  //   if (err) {
+  //     res.send('Unauthorized')
+  //   } else {
+  //     req.user = user
+  //     next()
+  //   }
+  // })
 }
 
 export const parseJwtAdmin = (

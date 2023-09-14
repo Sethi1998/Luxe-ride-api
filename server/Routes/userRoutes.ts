@@ -3,7 +3,7 @@ import loginController from '@/Controllers/user/loginController'
 import signupController from '@/Controllers/user/signupController'
 import updateUserController from '@/Controllers/user/updateUserController'
 import { IGetUserAuthInfoRequest } from '@/Types/User'
-import { parseJwt, parseJwtAdmin } from '@/services/authJwt'
+import { parseJwt } from '@/services/authJwt'
 import express, { Request, Response } from 'express'
 import usersFindOne from '@/Database/operations/User/findOne'
 import { upload } from '@/services/imgUpload'
@@ -11,33 +11,19 @@ import profileImgController from '@/Controllers/user/profileImgController'
 const userRouter = express.Router()
 
 //getUserInfo
-userRouter.get(
-  '/me',
-  [parseJwt],
-  async (req: IGetUserAuthInfoRequest, res: Response) => {
-    const id = req.user._id
-    if (!id) return null
-    const user = await usersFindOne({ _id: id })
-    const response = {
-      data: user,
-      message: 'Get user successfully',
-      success: true,
-    }
-    res.json(response)
-  },
-)
+userRouter.get('/me', [parseJwt], async (req: any, res: any) => {
+  const id = req?.user?.user._id
 
-//getAdminInfo
-userRouter.get(
-  '/getAdmin',
-  [parseJwtAdmin],
-  async (req: IGetUserAuthInfoRequest, res: Response) => {
-    const id = req.user._id
-    if (!id) return null
-    const user = await usersFindOne({ _id: id })
-    res.json(user)
-  },
-)
+  if (!id) return null
+  const user = await usersFindOne({ _id: id })
+  const response = {
+    data: user,
+    message: 'Get user successfully',
+    success: true,
+  }
+  res.json(response)
+})
+
 // getAllUser
 userRouter.get('/getUsers', [parseJwt], async (req: Request, res: Response) => {
   const input = req.query.filter as string
