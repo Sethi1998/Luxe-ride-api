@@ -3,7 +3,7 @@ import deleteCompanyController from '@/Controllers/vehicleCompany/deleteCompanyC
 import editCompanyController from '@/Controllers/vehicleCompany/editCompanyController'
 import getCompanyController from '@/Controllers/vehicleCompany/getCompanyController'
 import { VehicleCompany } from '@/Database/models/vehicleCompany'
-import { parseJwtAdmin } from '@/services/authJwt'
+import { parseJwt, parseJwtAdmin } from '@/services/authJwt'
 import { upload } from '@/services/imgUpload'
 import express, { Request, Response } from 'express'
 
@@ -11,7 +11,7 @@ const vechicleCompanyRouter = express.Router()
 ///getCategory
 vechicleCompanyRouter.get(
   '/getCompanies',
-  [parseJwtAdmin],
+  [parseJwt],
   async (req: Request, res: Response) => {
     const limit = req.query.limit as string
     const offset = req.query.offset as string

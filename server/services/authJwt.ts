@@ -25,7 +25,7 @@ export const parseJwt = (req: Request | any, res, next: () => void): void => {
   if (!authorizationHeader) {
     res.json({
       success: false,
-      message: "'Please Provide Authorization token'",
+      message: 'Please Provide Authorization token',
     })
   }
   const token: string = authorizationHeader.replace('Bearer ', '')
@@ -40,14 +40,6 @@ export const parseJwt = (req: Request | any, res, next: () => void): void => {
       next()
     }
   })
-  // checkToken(token).then((err, user) => {
-  //   if (err) {
-  //     res.send('Unauthorized')
-  //   } else {
-  //     req.user = user
-  //     next()
-  //   }
-  // })
 }
 
 export const parseJwtAdmin = (
@@ -57,20 +49,28 @@ export const parseJwtAdmin = (
 ): void => {
   const authorizationHeader = req.headers.authorization
   if (!authorizationHeader) {
-    res.send('Please Provide Authorization token')
+    res.json({
+      success: false,
+      message: 'Please Provide Authorization token',
+    })
   }
   const token: string = authorizationHeader.replace('Bearer ', '')
-  try {
-    const jwtData = checkToken(token)
-    if (jwtData && jwtData.user.role === 'admin') {
-      req.user = jwtData.user
-      next()
+  jwt.verify(token, process.env.JWT_TOKEN_SECRET, (err, user: any) => {
+    if (err) {
+      res.json({
+        success: false,
+        message: 'unauthorized',
+      })
     } else {
-      console.log('not authorised')
-      res.send(`You dont't have rights`)
-      // authLogger.debug('Token was not authorized', { token });
+      if (user.user.role === 'admin') {
+        req.user = user
+        next()
+      } else {
+        res.json({
+          success: false,
+          message: `Don't have rights`,
+        })
+      }
     }
-  } catch (err) {
-    console.log('err', err)
-  }
+  })
 }
