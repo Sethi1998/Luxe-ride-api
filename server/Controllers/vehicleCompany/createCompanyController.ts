@@ -14,6 +14,8 @@ export default async (input: VehicleCompany) => {
     const category = await VehicleCompanyModel.create(input)
     return {
       data: category,
+      success: true,
+      message: 'Successfully',
     }
   } catch (error) {
     return error

@@ -1,4 +1,5 @@
 import { VehicleCompany } from '@/Database/models/vehicleCompany'
+import { VehicleType } from '@/Database/models/vehicleType'
 import { vehicleFindOne } from '@/Database/operations/vehicle/vehicleFindOne'
 import { Error } from '@/Types/error'
 
@@ -14,7 +15,7 @@ export const categoryAlreadyExistError = (
 }
 
 export const categoryDoesNotExistsError = (
-  category: VehicleCompany,
+  category: VehicleCompany | VehicleType,
 ): Error | undefined => {
   if (!category) {
     return {

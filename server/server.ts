@@ -9,6 +9,7 @@ import cors from 'cors'
 import vechicleCategoryRouter from './Routes/vehicleCompanyRoutes'
 import vehicleRouter from './Routes/vehicleRouter'
 import contactSupportRouter from './Routes/contactSupport'
+import vehicleTypeRouter from './Routes/vehicleTypeRouter'
 const app: express.Application = express()
 const PORT = 8080
 const defaultRoute = '/carRental'
@@ -20,6 +21,8 @@ app.use(defaultRoute, userRouter)
 app.use(defaultRoute, vechicleCategoryRouter)
 app.use(defaultRoute, vehicleRouter)
 app.use(defaultRoute, contactSupportRouter)
+app.use(defaultRoute, vehicleTypeRouter)
+
 config()
 app.listen(PORT, () => {
   initiateMongoServer(process.env.DB_URL)

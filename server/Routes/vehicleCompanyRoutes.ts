@@ -60,7 +60,6 @@ vechicleCompanyRouter.post(
         ...input,
       }
     }
-
     const response = await editCompanyController(inputData)
     res.json(response)
   },
@@ -71,7 +70,6 @@ vechicleCompanyRouter.post(
   [parseJwtAdmin],
   async (req: Request, res: Response) => {
     const id = req.body.id
-    console.log(id, 'idd')
     const response = await deleteCompanyController(id)
     res.json(response)
   },

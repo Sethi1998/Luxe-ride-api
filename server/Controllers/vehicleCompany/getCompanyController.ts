@@ -12,6 +12,8 @@ export default async (limit: number, offset: number) => {
     return {
       data: categories,
       count: totalCount,
+      success: true,
+      message: 'Vehicle Categories',
     }
   } catch (error) {
     return error

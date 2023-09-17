@@ -1,11 +1,9 @@
-import VehicleCompanyModel, {
-  VehicleCompany,
-} from '@/Database/models/vehicleCompany'
+import VehicleTypemodel, { VehicleType } from '@/Database/models/vehicleType'
 import { categoryDoesNotExistsError } from '@/Errors/vehicleCategory'
 
-export default async (input: VehicleCompany) => {
+export default async (input: VehicleType) => {
   try {
-    const findCategory = await VehicleCompanyModel.findOne({
+    const findCategory = await VehicleTypemodel.findOne({
       _id: input._id,
     }).lean()
 
@@ -14,7 +12,7 @@ export default async (input: VehicleCompany) => {
       return {
         error: categoryNotExist,
       }
-    const output = await VehicleCompanyModel.findOneAndUpdate(
+    const output = await VehicleTypemodel.findOneAndUpdate(
       { _id: input._id },
       { $set: input },
       { new: true },
