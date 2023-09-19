@@ -29,14 +29,14 @@ export const parseJwt = (req: Request | any, res, next: () => void): void => {
     })
   }
   const token: string = authorizationHeader.replace('Bearer ', '')
-  jwt.verify(token, process.env.JWT_TOKEN_SECRET, (err, user) => {
+  jwt.verify(token, process.env.JWT_TOKEN_SECRET, (err, user: any) => {
     if (err) {
       res.json({
         success: false,
         message: 'unauthorized',
       })
     } else {
-      req.user = user
+      req.user = user.user
       next()
     }
   })
@@ -63,7 +63,7 @@ export const parseJwtAdmin = (
       })
     } else {
       if (user.user.role === 'admin') {
-        req.user = user
+        req.user = user.user
         next()
       } else {
         res.json({
