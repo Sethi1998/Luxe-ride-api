@@ -5,7 +5,6 @@ export default async (user: user, input: user) => {
   try {
     console.log(input, 'ads', user)
     const updateUser = await usersUpdateOne({ _id: user._id }, input)
-    console.log(updateUser, 'uppddd')
     if (updateUser) {
       return {
         data: updateUser,
