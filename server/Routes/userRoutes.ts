@@ -12,7 +12,7 @@ const userRouter = express.Router()
 
 //getUserInfo
 userRouter.get('/me', [parseJwt], async (req: any, res: any) => {
-  const id = req?.user?.user._id
+  const id = req?.user._id
 
   if (!id) return null
   const user = await usersFindOne({ _id: id })
