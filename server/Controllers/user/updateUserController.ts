@@ -3,7 +3,6 @@ import usersUpdateOne from '@/Database/operations/User/updateOne'
 
 export default async (user: user, input: user) => {
   try {
-    console.log(input, 'ads', user)
     const updateUser = await usersUpdateOne({ _id: user._id }, input)
     if (updateUser) {
       return {

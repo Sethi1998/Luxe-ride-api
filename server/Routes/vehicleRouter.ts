@@ -5,19 +5,15 @@ import { upload } from '@/services/imgUpload'
 import express, { Request, Response } from 'express'
 const vehicleRouter = express.Router()
 //gteVehicles
-vehicleRouter.get(
-  '/getVehicles',
-  [parseJwt],
-  async (req: Request, res: Response) => {
-    const limit = req.query.limit as string
-    const offset = req.query.offset as string
-    const response = await getVehiclesController(
-      parseInt(limit),
-      parseInt(offset),
-    )
-    res.json(response)
-  },
-)
+vehicleRouter.get('/getVehicles', async (req: Request, res: Response) => {
+  const limit = req.query.limit as string
+  const offset = req.query.offset as string
+  const response = await getVehiclesController(
+    parseInt(limit),
+    parseInt(offset),
+  )
+  res.json(response)
+})
 
 //addVehicle
 vehicleRouter.post(
@@ -28,7 +24,6 @@ vehicleRouter.post(
     const input = req.body
     const user = req.user
     const files = req.files
-    console.group(files.insurance, 'files')
     const inputBody = {
       ...input,
       insurance: files.insurance,

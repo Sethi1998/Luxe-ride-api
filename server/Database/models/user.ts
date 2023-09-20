@@ -44,6 +44,8 @@ export interface user {
   isEmailVerified: boolean
   isPhoneVerified: boolean
   isFacebook: string
+  language: string
+  description: string
 }
 const UserSchema = new Schema<user>(
   {
@@ -134,6 +136,12 @@ const UserSchema = new Schema<user>(
       default: false,
     },
     isFacebook: {
+      type: String,
+    },
+    language: {
+      type: String,
+    },
+    description: {
       type: String,
     },
   },

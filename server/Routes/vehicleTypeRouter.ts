@@ -3,7 +3,7 @@ import deleteVehicleTypeController from '@/Controllers/vehicleType/deleteVehicle
 import editVehicleTypeController from '@/Controllers/vehicleType/editVehicleTypeController'
 import getVehiclesTypeController from '@/Controllers/vehicleType/getVehiclesTypeController'
 import { VehicleType } from '@/Database/models/vehicleType'
-import { parseJwt, parseJwtAdmin } from '@/services/authJwt'
+import { parseJwtAdmin } from '@/services/authJwt'
 import { upload } from '@/services/imgUpload'
 import express, { Request, Response } from 'express'
 
@@ -11,7 +11,6 @@ const vehicleTypeRouter = express.Router()
 
 vehicleTypeRouter.get(
   '/getVehicleTypes',
-  [parseJwt],
   async (req: Request, res: Response) => {
     // const limit = req.query.limit as string
     // const offset = req.query.offset as string
