@@ -19,8 +19,7 @@ const fileStorage = Multer.diskStorage({
     ) {
       cb(null, `${uuidv4()}_${sanitize(file.originalname)}`)
     } else {
-      new Error('Only .png, .jpg and .jpeg format allowed!')
-      file.filename
+      cb(new Error('Wrong extension type'), false)
     }
   },
 })
