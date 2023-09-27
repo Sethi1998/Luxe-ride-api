@@ -6,20 +6,25 @@ export interface ContactSupport {
   description: string
 }
 
-const ContactSupportSchema = new Schema<ContactSupport>({
-  title: {
-    type: String,
-    required: true,
+const ContactSupportSchema = new Schema<ContactSupport>(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
   },
-  email: {
-    type: String,
-    required: true,
+  {
+    timestamps: true,
   },
-  description: {
-    type: String,
-    required: true,
-  },
-})
+)
 
 const ContactSupportModel = model('contactsupport', ContactSupportSchema)
 export default ContactSupportModel
