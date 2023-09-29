@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose'
+import { Schema, Types, model } from 'mongoose'
 export interface Address {
   address: string
   city: string
@@ -9,9 +9,9 @@ export interface Vehicle {
   _id: string
   locatedAddress: Address
   year: number
-  category: string
-  make: string
-  model: string
+  category: Types.ObjectId
+  make: Types.ObjectId
+  model: Types.ObjectId
   color: string
   vinNumber: string
   trim: string
@@ -26,7 +26,7 @@ export interface Vehicle {
   insurance: string[]
   images: string[]
   description: string
-  vehicleOwner: string
+  vehicleOwner: Types.ObjectId
   step: number
   status: boolean
 }
@@ -53,15 +53,15 @@ const VehicleSchema = new Schema<Vehicle>(
       type: Number,
     },
     category: {
-      type: String,
+      type: Schema.ObjectId,
       ref: 'vehicleType',
     },
     make: {
-      type: String,
+      type: Schema.ObjectId,
       ref: 'vehicleCompanies',
     },
     model: {
-      type: String,
+      type: Schema.ObjectId,
       ref: 'vehicleSubCategory',
     },
     color: {
@@ -111,7 +111,7 @@ const VehicleSchema = new Schema<Vehicle>(
       type: String,
     },
     vehicleOwner: {
-      type: String,
+      type: Schema.ObjectId,
       ref: 'user',
     },
     step: {

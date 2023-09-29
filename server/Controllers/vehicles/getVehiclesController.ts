@@ -3,7 +3,9 @@ import VehicleModel from '@/Database/models/vehicle'
 export default async (limit: number, offset: number) => {
   try {
     const vehicles = await VehicleModel.find()
-      .populate('vehicleCategory')
+      .populate('category')
+      .populate('make')
+      .populate('model')
       .sort({ createdAt: -1 })
       .limit(limit)
       .skip(offset)

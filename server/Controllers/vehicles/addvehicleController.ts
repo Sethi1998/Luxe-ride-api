@@ -34,6 +34,8 @@ export default async (input: Vehicle, user: user) => {
       const addVehicle = await VehicleModel.create(vehicleData)
       return {
         data: addVehicle,
+        success: true,
+        mssage: 'Step 1 created',
       }
     } else {
       const update = await VehicleModel.findOneAndUpdate(
@@ -42,6 +44,11 @@ export default async (input: Vehicle, user: user) => {
         { new: true },
       )
       console.log(update, 'updatee')
+      return {
+        data: update,
+        success: true,
+        mssage: 'Success',
+      }
     }
   } catch (error) {
     return {
