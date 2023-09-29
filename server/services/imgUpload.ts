@@ -30,6 +30,8 @@ export const upload = Multer({
 
 router.post('/imgUpload', upload.array('files'), async (req: any, res) => {
   const files = req.files
+  console.log(files, 'filess')
+
   const filesUrl = files.map((item) => item.filename)
   res.json(filesUrl)
 })

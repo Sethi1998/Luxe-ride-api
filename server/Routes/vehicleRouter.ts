@@ -1,7 +1,6 @@
 import addvehicleController from '@/Controllers/vehicles/addvehicleController'
 import getVehiclesController from '@/Controllers/vehicles/getVehiclesController'
 import { parseJwt } from '@/services/authJwt'
-import { upload } from '@/services/imgUpload'
 import express, { Request, Response } from 'express'
 const vehicleRouter = express.Router()
 //gteVehicles
@@ -19,17 +18,10 @@ vehicleRouter.get('/getVehicles', async (req: Request, res: Response) => {
 vehicleRouter.post(
   '/addVehicle',
   [parseJwt],
-  upload.fields([{ name: 'insurance' }, { name: 'vehicleImages' }]),
   async (req: any, res: Response) => {
     const input = req.body
     const user = req.user
-    const files = req.files
-    const inputBody = {
-      ...input,
-      insurance: files.insurance,
-      vehicleImages: files.vehicleImages,
-    }
-    const response = await addvehicleController(inputBody, user)
+    const response = await addvehicleController(input, user)
     res.json(response)
   },
 )

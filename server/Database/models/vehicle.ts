@@ -1,90 +1,125 @@
 import { Schema, model } from 'mongoose'
+export interface Address {
+  address: string
+  city: string
+  state: string
+  postalCode: string
+}
 export interface Vehicle {
-  vehicleLocated: string
-  vehicleName: string
-  vehicleCategory: string
-  vehicleYear: number
-  plateNumber: string
-  trim: string
+  _id: string
+  locatedAddress: Address
+  year: number
+  category: string
+  make: string
+  model: string
   color: string
   vinNumber: string
-  doors: number
-  seats: number
+  trim: string
+  door: number
+  plateNumber: string
+  seat: number
   fuelType: string
-  model: string
-  engine: string
+  transmission: string
+  odometer: string
+  discount: number
+  amount: number
   insurance: string[]
-  vehicleImages: string[]
+  images: string[]
+  description: string
   vehicleOwner: string
+  step: number
+  status: boolean
 }
 
 const VehicleSchema = new Schema<Vehicle>(
   {
-    vehicleLocated: {
-      type: String,
-      required: true,
+    locatedAddress: {
+      type: {
+        address: {
+          type: String,
+        },
+        city: {
+          type: String,
+        },
+        state: {
+          type: String,
+        },
+        postalCode: {
+          type: String,
+        },
+      },
     },
-    vehicleCategory: {
-      type: String,
-      ref: 'vehicleCategory',
-      required: true,
-    },
-    vehicleName: {
-      type: String,
-      required: true,
-    },
-    vehicleYear: {
+    year: {
       type: Number,
-      required: true,
     },
-    plateNumber: {
+    category: {
       type: String,
-      required: true,
-      unique: true,
+      ref: 'vehicleType',
     },
-    trim: {
+    make: {
       type: String,
-      required: true,
+      ref: 'vehicleCompanies',
+    },
+    model: {
+      type: String,
+      ref: 'vehicleSubCategory',
     },
     color: {
       type: String,
-      required: true,
     },
     vinNumber: {
       type: String,
-      required: true,
-      unique: true,
     },
-    doors: {
-      type: Number,
-      required: true,
+    trim: {
+      type: String,
     },
-    seats: {
+    door: {
       type: Number,
-      required: true,
+    },
+    plateNumber: {
+      type: String,
+    },
+    seat: {
+      type: Number,
     },
     fuelType: {
       type: String,
-      required: true,
     },
-    engine: {
+    transmission: {
       type: String,
-      required: true,
+    },
+    odometer: {
+      type: String,
+    },
+    discount: {
+      type: Number,
+    },
+    amount: {
+      type: Number,
     },
     insurance: [
       {
         type: String,
       },
     ],
-    vehicleImages: [
+    images: [
       {
         type: String,
       },
     ],
+    description: {
+      type: String,
+    },
     vehicleOwner: {
       type: String,
       ref: 'user',
-      required: true,
+    },
+    step: {
+      type: Number,
+    },
+    status: {
+      type: Boolean,
+      default: false,
     },
   },
   {
