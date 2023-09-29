@@ -1,13 +1,11 @@
 import { Schema, Types, model } from 'mongoose'
-export interface Address {
+
+export interface Vehicle {
+  _id: string
   address: string
   city: string
   state: string
   postalCode: string
-}
-export interface Vehicle {
-  _id: string
-  locatedAddress: Address
   year: number
   category: Types.ObjectId
   make: Types.ObjectId
@@ -33,22 +31,19 @@ export interface Vehicle {
 
 const VehicleSchema = new Schema<Vehicle>(
   {
-    locatedAddress: {
-      type: {
-        address: {
-          type: String,
-        },
-        city: {
-          type: String,
-        },
-        state: {
-          type: String,
-        },
-        postalCode: {
-          type: String,
-        },
-      },
+    address: {
+      type: String,
     },
+    city: {
+      type: String,
+    },
+    state: {
+      type: String,
+    },
+    postalCode: {
+      type: String,
+    },
+
     year: {
       type: Number,
     },
