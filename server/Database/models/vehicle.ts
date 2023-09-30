@@ -11,7 +11,7 @@ export interface Vehicle {
   make: Types.ObjectId
   model: Types.ObjectId
   color: string
-  vinstring: string
+  vinNumber: string
   trim: string
   door: string
   platestring: string
@@ -62,7 +62,7 @@ const VehicleSchema = new Schema<Vehicle>(
     color: {
       type: String,
     },
-    vinstring: {
+    vinNumber: {
       type: String,
     },
     trim: {
