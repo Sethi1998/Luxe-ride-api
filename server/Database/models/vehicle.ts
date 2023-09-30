@@ -6,27 +6,27 @@ export interface Vehicle {
   city: string
   state: string
   postalCode: string
-  year: number
+  year: string
   category: Types.ObjectId
   make: Types.ObjectId
   model: Types.ObjectId
   color: string
-  vinNumber: string
+  vinstring: string
   trim: string
-  door: number
-  plateNumber: string
-  seat: number
+  door: string
+  platestring: string
+  seat: string
   fuelType: string
   transmission: string
   odometer: string
-  discount: number
-  amount: number
+  discount: string
+  amount: string
   insurance: string[]
   images: string[]
   description: string
   vehicleOwner: Types.ObjectId
-  step: number
-  status: boolean
+  step: string
+  publish: boolean
 }
 
 const VehicleSchema = new Schema<Vehicle>(
@@ -45,7 +45,7 @@ const VehicleSchema = new Schema<Vehicle>(
     },
 
     year: {
-      type: Number,
+      type: String,
     },
     category: {
       type: Schema.ObjectId,
@@ -62,20 +62,20 @@ const VehicleSchema = new Schema<Vehicle>(
     color: {
       type: String,
     },
-    vinNumber: {
+    vinstring: {
       type: String,
     },
     trim: {
       type: String,
     },
     door: {
-      type: Number,
+      type: String,
     },
-    plateNumber: {
+    platestring: {
       type: String,
     },
     seat: {
-      type: Number,
+      type: String,
     },
     fuelType: {
       type: String,
@@ -87,10 +87,10 @@ const VehicleSchema = new Schema<Vehicle>(
       type: String,
     },
     discount: {
-      type: Number,
+      type: String,
     },
     amount: {
-      type: Number,
+      type: String,
     },
     insurance: [
       {
@@ -110,9 +110,9 @@ const VehicleSchema = new Schema<Vehicle>(
       ref: 'user',
     },
     step: {
-      type: Number,
+      type: String,
     },
-    status: {
+    publish: {
       type: Boolean,
       default: false,
     },

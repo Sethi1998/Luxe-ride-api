@@ -1,8 +1,8 @@
 import VehicleModel from '@/Database/models/vehicle'
 
-export default async (limit: number, offset: number) => {
+export default async (user: string, limit: number, offset: number) => {
   try {
-    const vehicles = await VehicleModel.find()
+    const vehicles = await VehicleModel.find({ vehicleOwner: user })
       .populate('category')
       .populate('make')
       .populate('model')

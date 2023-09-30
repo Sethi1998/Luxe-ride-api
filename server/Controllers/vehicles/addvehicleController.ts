@@ -30,12 +30,28 @@ export default async (input: Vehicle, user: user) => {
       vehicleOwner: user._id,
     }
 
-    if (input.step === 1) {
+    if (input.step === '1') {
       const addVehicle = await VehicleModel.create(vehicleData)
       return {
         data: addVehicle,
         success: true,
         mssage: 'Step 1 created',
+      }
+    } else if (input.step === '4') {
+      const inputData = {
+        ...input,
+        publish: true,
+      }
+      const update = await VehicleModel.findOneAndUpdate(
+        { _id: input._id },
+        { $set: inputData },
+        { new: true },
+      )
+      console.log(update, 'updatee')
+      return {
+        data: update,
+        success: true,
+        mssage: 'Success',
       }
     } else {
       const update = await VehicleModel.findOneAndUpdate(
