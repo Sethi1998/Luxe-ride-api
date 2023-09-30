@@ -14,7 +14,7 @@ export interface Vehicle {
   vinNumber: string
   trim: string
   door: string
-  platestring: string
+  plateNumber: string
   seat: string
   fuelType: string
   transmission: string
@@ -71,7 +71,7 @@ const VehicleSchema = new Schema<Vehicle>(
     door: {
       type: String,
     },
-    platestring: {
+    plateNumber: {
       type: String,
     },
     seat: {
