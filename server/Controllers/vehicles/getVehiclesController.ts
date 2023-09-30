@@ -10,7 +10,7 @@ export default async (user: string, limit: number, offset: number) => {
       .limit(limit)
       .skip(offset)
       .lean()
-    const totalCount = await VehicleModel.countDocuments()
+    const totalCount = await VehicleModel.countDocuments({ vehicleOwner: user })
     return {
       data: vehicles,
       count: totalCount,
