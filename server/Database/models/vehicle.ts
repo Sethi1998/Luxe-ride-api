@@ -64,6 +64,9 @@ const VehicleSchema = new Schema<Vehicle>(
     },
     vinNumber: {
       type: String,
+      index: true,
+      unique: true,
+      sparse: true,
     },
     trim: {
       type: String,
@@ -73,6 +76,9 @@ const VehicleSchema = new Schema<Vehicle>(
     },
     plateNumber: {
       type: String,
+      index: true,
+      unique: true,
+      sparse: true,
     },
     seat: {
       type: String,
