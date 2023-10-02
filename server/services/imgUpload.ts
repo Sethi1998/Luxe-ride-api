@@ -3,6 +3,7 @@ import express from 'express'
 import { v4 as uuidv4 } from 'uuid'
 import sanitize from 'sanitize-filename'
 import fs from 'fs'
+import { parseJwt } from './authJwt'
 const router = express.Router()
 
 const fileStorage = Multer.diskStorage({
@@ -28,12 +29,20 @@ export const upload = Multer({
   limits: { fileSize: 50 * 1024 * 1024 }, //20mb
 })
 
-router.post('/imgUpload', upload.array('files'), async (req: any, res) => {
-  const files = req.files
-  console.log(files, 'filess')
-
-  const filesUrl = files.map((item) => item.filename)
-  res.json(filesUrl)
-})
+router.post(
+  '/imgUpload',
+  [parseJwt],
+  upload.array('files'),
+  async (req: any, res) => {
+    const files = req.files
+    const filesUrl = files.map((item) => item.filename)
+    const data = {
+      data: filesUrl,
+      success: true,
+      message: 'Img Uploaded Sucessfully',
+    }
+    res.json(data)
+  },
+)
 
 export default router
