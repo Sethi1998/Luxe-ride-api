@@ -20,6 +20,7 @@ export interface Vehicle {
   transmission: string
   odometer: string
   discount: string
+  discountAmount: string
   amount: string
   insurance: string[]
   images: string[]
@@ -93,6 +94,9 @@ const VehicleSchema = new Schema<Vehicle>(
       type: String,
     },
     discount: {
+      type: String,
+    },
+    discountAmount: {
       type: String,
     },
     amount: {

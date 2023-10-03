@@ -1,5 +1,6 @@
 import addvehicleController from '@/Controllers/vehicles/addvehicleController'
 import getVehiclesController from '@/Controllers/vehicles/getVehiclesController'
+import updateVehicle from '@/Controllers/vehicles/updateVehicle'
 import { parseJwt } from '@/services/authJwt'
 import express, { Response } from 'express'
 const vehicleRouter = express.Router()
@@ -32,4 +33,15 @@ vehicleRouter.post(
   },
 )
 
+//updateVehicle
+vehicleRouter.post(
+  '/publishVehicle',
+  [parseJwt],
+  async (req: any, res: Response) => {
+    const input = req.body
+
+    const output = await updateVehicle(input)
+    res.json(output)
+  },
+)
 export default vehicleRouter
