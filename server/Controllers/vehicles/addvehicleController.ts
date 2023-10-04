@@ -9,9 +9,6 @@ import {
 
 export default async (input: Vehicle, user: user) => {
   try {
-    const category = await VehicleCategoryModel.findOne({
-      _id: input.make,
-    }).lean()
     const vinNumber = await vinNumberExist(input.vinNumber)
     if (vinNumber) {
       return { error: vinNumber }
@@ -20,17 +17,21 @@ export default async (input: Vehicle, user: user) => {
     if (plateNumber) {
       return { error: plateNumber }
     }
-    const categoryNotExist = categoryDoesNotExistsError(category)
-    if (categoryNotExist)
-      return {
-        error: categoryNotExist,
-      }
+
     const vehicleData = {
       ...input,
       vehicleOwner: user._id,
     }
 
     if (input.step === '1') {
+      const category = await VehicleCategoryModel.findOne({
+        _id: input.make,
+      }).lean()
+      const categoryNotExist = categoryDoesNotExistsError(category)
+      if (categoryNotExist)
+        return {
+          error: categoryNotExist,
+        }
       const addVehicle = await VehicleModel.create(vehicleData)
       return {
         data: addVehicle,
