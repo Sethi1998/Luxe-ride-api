@@ -1,9 +1,19 @@
 import addvehicleController from '@/Controllers/vehicles/addvehicleController'
+import getVehicleController from '@/Controllers/vehicles/getVehicleController'
 import getVehiclesController from '@/Controllers/vehicles/getVehiclesController'
 import updateVehicle from '@/Controllers/vehicles/updateVehicle'
 import { parseJwt } from '@/services/authJwt'
 import express, { Response } from 'express'
 const vehicleRouter = express.Router()
+
+//getVehicle
+vehicleRouter.get('/getVehicle', [parseJwt], async (req, res) => {
+  const input = req.query.id as string
+  console.log(input)
+
+  const response = await getVehicleController(input)
+  res.json(response)
+})
 //gteVehicles
 vehicleRouter.get(
   '/getMeVehicles',
@@ -11,11 +21,13 @@ vehicleRouter.get(
   async (req: any, res: Response) => {
     const limit = req.query.limit as string
     const offset = req.query.offset as string
+    const publish = req.query.publish as boolean
     const user = req.user
     const response = await getVehiclesController(
       user,
       parseInt(limit),
       parseInt(offset),
+      publish,
     )
     res.json(response)
   },
@@ -35,7 +47,7 @@ vehicleRouter.post(
 
 //updateVehicle
 vehicleRouter.post(
-  '/publishVehicle',
+  '/updateVehicle',
   [parseJwt],
   async (req: any, res: Response) => {
     const input = req.body

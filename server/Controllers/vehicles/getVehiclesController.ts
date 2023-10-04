@@ -1,8 +1,13 @@
 import VehicleModel from '@/Database/models/vehicle'
 
-export default async (user: string, limit: number, offset: number) => {
+export default async (
+  user: string,
+  limit: number,
+  offset: number,
+  publish: boolean,
+) => {
   try {
-    const vehicles = await VehicleModel.find({ vehicleOwner: user })
+    const vehicles = await VehicleModel.find({ vehicleOwner: user, publish })
       .populate('category')
       .populate('make')
       .populate('model')
@@ -10,7 +15,10 @@ export default async (user: string, limit: number, offset: number) => {
       .limit(limit)
       .skip(offset)
       .lean()
-    const totalCount = await VehicleModel.countDocuments({ vehicleOwner: user })
+    const totalCount = await VehicleModel.countDocuments({
+      vehicleOwner: user,
+      publish: publish,
+    })
     return {
       data: vehicles,
       count: totalCount,
