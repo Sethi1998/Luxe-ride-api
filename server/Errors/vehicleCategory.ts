@@ -28,11 +28,13 @@ export const categoryDoesNotExistsError = (
 export const vinNumberExist = async (
   input: string,
 ): Promise<Error | undefined> => {
-  const vinNumber = await vehicleFindOne({ vinNumber: input })
-  if (vinNumber) {
-    return {
-      message: 'Vin Number already exist.',
-      success: false,
+  if (input) {
+    const vinNumber = await vehicleFindOne({ vinNumber: input })
+    if (vinNumber) {
+      return {
+        message: 'Vin Number already exist.',
+        success: false,
+      }
     }
   }
 }
@@ -40,12 +42,14 @@ export const vinNumberExist = async (
 export const numberPlateExist = async (
   plate: string,
 ): Promise<Error | undefined> => {
-  const numberPlate = await vehicleFindOne({ plateNumber: plate })
+  if (plate) {
+    const numberPlate = await vehicleFindOne({ plateNumber: plate })
 
-  if (numberPlate) {
-    return {
-      message: 'Number Plate already exist.',
-      success: false,
+    if (numberPlate) {
+      return {
+        message: 'Number Plate already exist.',
+        success: false,
+      }
     }
   }
 }

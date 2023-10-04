@@ -10,7 +10,7 @@ import {
 export default async (input: Vehicle, user: user) => {
   try {
     const category = await VehicleCategoryModel.findOne({
-      _id: input.model,
+      _id: input.make,
     }).lean()
     const vinNumber = await vinNumberExist(input.vinNumber)
     if (vinNumber) {
