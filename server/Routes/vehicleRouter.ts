@@ -1,4 +1,5 @@
 import addvehicleController from '@/Controllers/vehicles/addvehicleController'
+import deleteVehicleController from '@/Controllers/vehicles/deleteVehicleController'
 import getVehicleController from '@/Controllers/vehicles/getVehicleController'
 import getVehiclesController from '@/Controllers/vehicles/getVehiclesController'
 import updateVehicle from '@/Controllers/vehicles/updateVehicle'
@@ -53,6 +54,16 @@ vehicleRouter.post(
     const input = req.body
 
     const output = await updateVehicle(input)
+    res.json(output)
+  },
+)
+//deleteVehicle
+vehicleRouter.delete(
+  '/deleteVehicle',
+  [parseJwt],
+  async (req: any, res: Response) => {
+    const input = req.body
+    const output = await deleteVehicleController(input)
     res.json(output)
   },
 )
