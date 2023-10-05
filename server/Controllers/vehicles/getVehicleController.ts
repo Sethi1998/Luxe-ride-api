@@ -1,7 +1,11 @@
 import VehicleModel from '@/Database/models/vehicle'
 
 export default async (input) => {
-  const vehicle = await VehicleModel.findOne({ _id: input }).lean()
+  const vehicle = await VehicleModel.findOne({ _id: input })
+    .populate('category')
+    .populate('make')
+    .populate('model')
+    .lean()
 
   if (vehicle) {
     return {

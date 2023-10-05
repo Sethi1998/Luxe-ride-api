@@ -34,6 +34,10 @@ vehicleRouter.get(
   },
 )
 
+//getAllVehicles
+// vehicleRouter.get('/getAllVehicles',[parseJwt],async(req,res)=>{
+
+// })
 //addVehicle
 vehicleRouter.post(
   '/addVehicle',
