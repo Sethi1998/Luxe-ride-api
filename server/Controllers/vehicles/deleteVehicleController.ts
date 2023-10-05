@@ -7,5 +7,10 @@ export default async (input) => {
       success: true,
       message: 'Vehicle Deleted SuccessFully',
     }
+  } else {
+    return {
+      success: false,
+      message: 'Vehicle Not Found',
+    }
   }
 }
