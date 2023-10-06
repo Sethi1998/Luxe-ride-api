@@ -19,8 +19,8 @@ const isPhone = (string: string): boolean => {
 }
 
 export const checkPasswordPolicies = (password: string): boolean => {
-  if (password.length < 8) {
-    return !true
+  if (password.length >= 8) {
+    return true
   }
 }
 

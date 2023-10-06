@@ -8,6 +8,7 @@ import express, { Request, Response } from 'express'
 import usersFindOne from '@/Database/operations/User/findOne'
 import { upload } from '@/services/imgUpload'
 import profileImgController from '@/Controllers/user/profileImgController'
+import changePasswordController from '@/Controllers/user/changePasswordController'
 const userRouter = express.Router()
 
 //getUserInfo
@@ -84,5 +85,12 @@ userRouter.post(
     res.send(response)
   },
 )
+//changePassword
+userRouter.post('/changePassword', [parseJwt], async (req, res) => {
+  const user = req.user
+  const input = req.body
+  const response = await changePasswordController(input, user)
+  res.json(response)
+})
 
 export default userRouter

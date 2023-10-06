@@ -7,7 +7,7 @@ export default async (input) => {
     return {
       data: data,
       success: true,
-      message: 'Vehicle Published Successfully',
+      message: 'Vehicle Updated Successfully',
     }
   }
 }

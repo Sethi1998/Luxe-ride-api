@@ -11,6 +11,7 @@ import vehicleRouter from './Routes/vehicleRouter'
 import contactSupportRouter from './Routes/contactSupport'
 import vehicleTypeRouter from './Routes/vehicleTypeRouter'
 import vehicleSubCategoryRouter from './Routes/vehicleSubCategoryRouter'
+import favoriteVehicleRouter from './Routes/favoriteVehicleRouter'
 const app: express.Application = express()
 const PORT = 8080
 const defaultRoute = '/carRental'
@@ -24,6 +25,7 @@ app.use(defaultRoute, vehicleRouter)
 app.use(defaultRoute, contactSupportRouter)
 app.use(defaultRoute, vehicleTypeRouter)
 app.use(defaultRoute, vehicleSubCategoryRouter)
+app.use(defaultRoute, favoriteVehicleRouter)
 
 config()
 app.listen(PORT, () => {

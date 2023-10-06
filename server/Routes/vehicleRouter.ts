@@ -1,5 +1,6 @@
 import addvehicleController from '@/Controllers/vehicles/addvehicleController'
 import deleteVehicleController from '@/Controllers/vehicles/deleteVehicleController'
+import getAllVehiclesControler from '@/Controllers/vehicles/getAllVehiclesControler'
 import getVehicleController from '@/Controllers/vehicles/getVehicleController'
 import getVehiclesController from '@/Controllers/vehicles/getVehiclesController'
 import updateVehicle from '@/Controllers/vehicles/updateVehicle'
@@ -10,13 +11,11 @@ const vehicleRouter = express.Router()
 //getVehicle
 vehicleRouter.get('/getVehicle', [parseJwt], async (req, res) => {
   const input = req.query.id as string
-  console.log(input)
-
   const response = await getVehicleController(input)
   res.json(response)
 })
 //gteVehicles
-vehicleRouter.get(
+vehicleRouter.post(
   '/getMeVehicles',
   [parseJwt],
   async (req: any, res: Response) => {
@@ -34,10 +33,12 @@ vehicleRouter.get(
   },
 )
 
-//getAllVehicles
-// vehicleRouter.get('/getAllVehicles',[parseJwt],async(req,res)=>{
-
-// })
+// getAllVehicles
+vehicleRouter.post('/getAllVehicles', [parseJwt], async (req, res) => {
+  const input = req.body
+  const response = await getAllVehiclesControler(input)
+  res.json(response)
+})
 //addVehicle
 vehicleRouter.post(
   '/addVehicle',
@@ -56,7 +57,6 @@ vehicleRouter.post(
   [parseJwt],
   async (req: any, res: Response) => {
     const input = req.body
-
     const output = await updateVehicle(input)
     res.json(output)
   },
