@@ -15,7 +15,7 @@ vehicleRouter.get('/getVehicle', [parseJwt], async (req, res) => {
   res.json(response)
 })
 //gteVehicles
-vehicleRouter.post(
+vehicleRouter.get(
   '/getMeVehicles',
   [parseJwt],
   async (req: any, res: Response) => {
