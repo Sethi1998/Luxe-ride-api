@@ -2,7 +2,7 @@ import FavoriteVehcileModel from '@/Database/models/favoriteVehicle'
 
 export default async (input, user) => {
   const vehicle = await FavoriteVehcileModel.findByIdAndDelete({
-    vehicle: input._id,
+    vehicle: input.vehicle,
     user: user,
   })
   if (vehicle) {
