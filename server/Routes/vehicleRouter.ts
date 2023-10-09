@@ -36,7 +36,8 @@ vehicleRouter.get(
 // getAllVehicles
 vehicleRouter.post('/getAllVehicles', [parseJwt], async (req, res) => {
   const input = req.body
-  const response = await getAllVehiclesControler(input)
+  const user = req.user
+  const response = await getAllVehiclesControler(input, user)
   res.json(response)
 })
 //addVehicle
