@@ -1,8 +1,9 @@
 import FavoriteVehcileModel from '@/Database/models/favoriteVehicle'
 
-export default async (input) => {
+export default async (input, user) => {
   const vehicle = await FavoriteVehcileModel.findByIdAndDelete({
-    _id: input._id,
+    vehicle: input._id,
+    user: user,
   })
   if (vehicle) {
     return {

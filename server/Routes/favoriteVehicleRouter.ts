@@ -33,7 +33,8 @@ favoriteVehicleRouter.post(
   [parseJwt],
   async (req, res) => {
     const input = req.body
-    const response = await removeFavoriteVehicleController(input)
+    const user = req.user
+    const response = await removeFavoriteVehicleController(input, user)
     res.json(response)
   },
 )
