@@ -10,6 +10,7 @@ export default async (input, user) => {
     .populate('category')
     .populate('make')
     .populate('model')
+    .populate('vehicleOwner')
     .sort({ createdAt: -1 })
     .lean()
 

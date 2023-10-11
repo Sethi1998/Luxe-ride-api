@@ -5,6 +5,7 @@ export default async (input) => {
     .populate('category')
     .populate('make')
     .populate('model')
+    .populate('vehicleOwner')
     .lean()
 
   if (vehicle) {
