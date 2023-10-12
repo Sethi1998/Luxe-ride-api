@@ -36,7 +36,7 @@ export default async (input: Vehicle, user: user) => {
       return {
         data: addVehicle,
         success: true,
-        mssage: 'Step 1 created',
+        message: 'Step 1 created',
       }
     } else {
       const update = await VehicleModel.findOneAndUpdate(
@@ -47,7 +47,7 @@ export default async (input: Vehicle, user: user) => {
       return {
         data: update,
         success: true,
-        mssage: 'Success',
+        message: 'Success',
       }
     }
   } catch (error) {
