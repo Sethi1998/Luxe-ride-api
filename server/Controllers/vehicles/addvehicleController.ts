@@ -11,11 +11,11 @@ export default async (input: Vehicle, user: user) => {
   try {
     const vinNumber = await vinNumberExist(input.vinNumber)
     if (vinNumber) {
-      return { error: vinNumber }
+      return vinNumber
     }
     const plateNumber = await numberPlateExist(input.plateNumber)
     if (plateNumber) {
-      return { error: plateNumber }
+      return plateNumber
     }
 
     const vehicleData = {
@@ -28,10 +28,10 @@ export default async (input: Vehicle, user: user) => {
         _id: input.make,
       }).lean()
       const categoryNotExist = categoryDoesNotExistsError(category)
-      if (categoryNotExist)
-        return {
-          error: categoryNotExist,
-        }
+      if (categoryNotExist) {
+        return categoryNotExist
+      }
+
       const addVehicle = await VehicleModel.create(vehicleData)
       return {
         data: addVehicle,
