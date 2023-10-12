@@ -11,7 +11,6 @@ export default async (
       .populate('category')
       .populate('make')
       .populate('model')
-      .populate('vehicleOwner')
       .sort({ createdAt: -1 })
       .limit(limit)
       .skip(offset)

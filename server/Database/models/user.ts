@@ -46,6 +46,7 @@ export interface user {
   isFacebook: string
   language: string
   description: string
+  nationality: string
 }
 const UserSchema = new Schema<user>(
   {
@@ -80,6 +81,9 @@ const UserSchema = new Schema<user>(
     password: {
       type: String,
       required: true,
+    },
+    nationality: {
+      type: String,
     },
     license: new Schema<Driverlicense>({
       firstName: {
