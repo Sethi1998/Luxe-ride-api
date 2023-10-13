@@ -13,28 +13,28 @@ export default async (user) => {
         from: 'vehicles',
         localField: 'vehicle',
         foreignField: '_id',
-        as: 'vehicleData',
+        as: 'vehicle',
       },
     },
-    { $unwind: '$vehicleData' },
+    { $unwind: '$vehicle' },
     {
       $lookup: {
         from: 'vehiclecompanies',
-        localField: 'vehicleData.make',
+        localField: 'vehicle.make',
         foreignField: '_id',
-        as: 'companyData',
+        as: 'make',
       },
     },
     {
       $lookup: {
         from: 'vehiclesubcategories',
-        localField: 'vehicleData.model',
+        localField: 'vehicle.model',
         foreignField: '_id',
-        as: 'modelData',
+        as: 'model',
       },
     },
-    { $unwind: '$companyData' },
-    { $unwind: '$modelData' },
+    { $unwind: '$make' },
+    { $unwind: '$model' },
   ])
 
   if (vehciles.length > 0) {
