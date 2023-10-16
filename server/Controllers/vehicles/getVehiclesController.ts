@@ -22,6 +22,8 @@ export default async (
     return {
       data: vehicles,
       count: totalCount,
+      success: true,
+      message: 'Vehciles Found',
     }
   } catch (error) {
     return error

@@ -14,7 +14,7 @@ vehicleRouter.get('/getVehicle', [parseJwt], async (req, res) => {
   const response = await getVehicleController(input)
   res.json(response)
 })
-//gteVehicles
+//getMeVehicles
 vehicleRouter.get(
   '/getMeVehicles',
   [parseJwt],
