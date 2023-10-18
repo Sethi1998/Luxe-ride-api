@@ -6,6 +6,8 @@ export interface Vehicle {
   city: string
   state: string
   postalCode: string
+  lat: string
+  long: string
   year: string
   category: Types.ObjectId
   make: Types.ObjectId
@@ -44,7 +46,12 @@ const VehicleSchema = new Schema<Vehicle>(
     postalCode: {
       type: String,
     },
-
+    lat: {
+      type: String,
+    },
+    long: {
+      type: String,
+    },
     year: {
       type: String,
     },

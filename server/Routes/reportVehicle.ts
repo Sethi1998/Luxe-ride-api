@@ -13,6 +13,7 @@ reportVehicleRouter.get(
     res.json(response)
   },
 )
+
 //reportVehcile
 reportVehicleRouter.post(
   '/reportVehicle',
